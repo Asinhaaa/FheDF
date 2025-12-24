@@ -50,13 +50,13 @@ export default function Documentation() {
               <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
                 <FileText className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-lg hidden sm:block">PDF<span className="text-gradient">Zero</span></span>
+              <span className="font-bold text-lg hidden sm:block">FHE<span className="text-gradient">Pdf</span></span>
             </Link>
           </div>
           
           <div className="flex items-center gap-3">
             <a 
-              href="https://github.com/kanavtwt/pdf0" 
+              href="https://github.com/ramx_ai" 
               target="_blank" 
               rel="noopener noreferrer"
             >
@@ -132,7 +132,7 @@ export default function Documentation() {
               <section id="overview" className="mb-16">
                 <h2 className="text-2xl font-bold mb-4">Overview</h2>
                 <p className="text-muted-foreground mb-6">
-                  PDFZero is a privacy-focused PDF toolkit that processes documents entirely 
+                  FHEPdf is a privacy-focused PDF toolkit that processes documents entirely 
                   client-side, ensuring your sensitive files never leave your device. Our 
                   flagship feature—FHE Encrypted Search—uses Fully Homomorphic Encryption 
                   to enable searching within encrypted documents without ever exposing the 
@@ -449,7 +449,7 @@ displaySearchResults(results);`
               <section id="use-cases" className="mb-16">
                 <h2 className="text-2xl font-bold mb-4">Use Cases</h2>
                 <p className="text-muted-foreground mb-6">
-                  PDFZero's privacy-preserving features are ideal for handling sensitive 
+                  FHEPdf's privacy-preserving features are ideal for handling sensitive 
                   documents across various industries and scenarios.
                 </p>
 
@@ -494,7 +494,7 @@ displaySearchResults(results);`
               <section id="zama-integration" className="mb-16">
                 <h2 className="text-2xl font-bold mb-4">Zama Integration</h2>
                 <p className="text-muted-foreground mb-6">
-                  PDFZero is built on Zama's Concrete library, the leading open-source 
+                  FHEPdf is built on Zama's Concrete library, the leading open-source 
                   implementation of TFHE (Torus Fully Homomorphic Encryption).
                 </p>
 
@@ -585,7 +585,7 @@ displaySearchResults(results);`
                       </Button>
                     </Link>
                     <a 
-                      href="https://github.com/kanavtwt/pdf0" 
+                      href="https://github.com/ramx_ai" 
                       target="_blank" 
                       rel="noopener noreferrer"
                     >
@@ -606,7 +606,7 @@ displaySearchResults(results);`
       <footer className="py-8 border-t border-border">
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>Built for the Zama FHE Developer Grant</p>
+            <p>Built by <a href="https://x.com/ramx_ai" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">@ramx_ai</a> for the Zama FHE Developer Grant</p>
             <div className="flex items-center gap-4">
               <a 
                 href="https://www.zama.ai/" 
@@ -617,7 +617,7 @@ displaySearchResults(results);`
                 Powered by Zama
               </a>
               <a 
-                href="https://github.com/kanavtwt/pdf0" 
+                href="https://github.com/ramx_ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"

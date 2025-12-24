@@ -39,7 +39,7 @@ export function ToolLayout({
               <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
                 <FileText className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold text-lg hidden sm:block">PDF<span className="text-gradient">Zero</span></span>
+              <span className="font-bold text-lg hidden sm:block">FHE<span className="text-gradient">Pdf</span></span>
             </Link>
           </div>
           
@@ -49,7 +49,7 @@ export function ToolLayout({
               <span>Client-side processing</span>
             </div>
             <a 
-              href="https://github.com/kanavtwt/pdf0" 
+              href="https://github.com/ramx_ai" 
               target="_blank" 
               rel="noopener noreferrer"
             >

@@ -103,7 +103,7 @@ export default function Home() {
             <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
               <FileText className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-lg">PDF<span className="text-gradient">Zero</span></span>
+            <span className="font-bold text-lg">FHE<span className="text-gradient">Pdf</span></span>
           </Link>
           
           <div className="hidden md:flex items-center gap-6">
@@ -114,7 +114,7 @@ export default function Home() {
               Documentation
             </Link>
             <a 
-              href="https://github.com/kanavtwt/pdf0" 
+              href="https://github.com/ramx_ai" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -282,7 +282,7 @@ export default function Home() {
               <Lock className="w-4 h-4 mr-2" />
               Privacy First
             </Badge>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why PDFZero?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why FHEPdf?</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Built from the ground up with privacy as the core principle, not an afterthought.
             </p>
@@ -394,7 +394,7 @@ export default function Home() {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
-              <a href="https://github.com/kanavtwt/pdf0" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com/ramx_ai" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="text-lg px-8 h-14 bg-transparent">
                   <Github className="w-5 h-5 mr-2" />
                   View on GitHub
@@ -413,14 +413,14 @@ export default function Home() {
               <div className="w-8 h-8 rounded-lg gradient-primary flex items-center justify-center">
                 <FileText className="w-5 h-5 text-white" />
               </div>
-              <span className="font-bold">PDF<span className="text-gradient">Zero</span></span>
+              <span className="font-bold">FHE<span className="text-gradient">Pdf</span></span>
             </div>
             <div className="flex items-center gap-6 text-sm text-muted-foreground">
               <Link href="/docs" className="hover:text-foreground transition-colors">
                 Documentation
               </Link>
               <a 
-                href="https://github.com/kanavtwt/pdf0" 
+                href="https://github.com/ramx_ai" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-foreground transition-colors"
@@ -437,7 +437,7 @@ export default function Home() {
               </a>
             </div>
             <div className="text-sm text-muted-foreground">
-              Built for the Zama FHE Developer Grant
+              Built by <a href="https://x.com/ramx_ai" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">@ramx_ai</a> for the Zama FHE Developer Grant
             </div>
           </div>
         </div>

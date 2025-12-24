@@ -47,3 +47,10 @@
 - [x] Secure file handling
 - [x] Performance optimization for large files
 - [x] Unit tests for PDF processing logic
+
+
+## Branding Updates
+
+- [x] Rename app from PDFZero to FHEPdf
+- [x] Add Twitter handle @ramx_ai with link to https://x.com/ramx_ai
+- [x] Update GitHub references to user's profile
