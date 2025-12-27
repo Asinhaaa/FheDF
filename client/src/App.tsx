@@ -4,6 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { Web3Provider } from "./components/Web3Provider";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import MergePdf from "./pages/tools/MergePdf";
@@ -12,6 +13,7 @@ import CompressPdf from "./pages/tools/CompressPdf";
 import ConvertPdf from "./pages/tools/ConvertPdf";
 import EncryptedSearch from "./pages/tools/EncryptedSearch";
 import Documentation from "./pages/Documentation";
+import FheDemo from "./pages/FheDemo";
 
 function Router() {
   return (
@@ -23,6 +25,7 @@ function Router() {
       <Route path="/tools/compress" component={CompressPdf} />
       <Route path="/tools/convert" component={ConvertPdf} />
       <Route path="/tools/encrypted-search" component={EncryptedSearch} />
+      <Route path="/fhe-demo" component={FheDemo} />
       <Route path="/docs" component={Documentation} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
@@ -34,10 +37,12 @@ function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <Web3Provider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </Web3Provider>
       </ThemeProvider>
     </ErrorBoundary>
   );

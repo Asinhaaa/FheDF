@@ -54,3 +54,14 @@
 - [x] Rename app from PDFZero to FHEPdf
 - [x] Add Twitter handle @ramx_ai with link to https://x.com/ramx_ai
 - [x] Update GitHub references to user's profile
+
+
+## Deployment Fix & Web3 Integration
+
+- [x] Fix deployment issues - webpage not opening
+- [x] Add wallet connection (wagmi + viem + RainbowKit)
+- [x] Configure Zama fhEVM testnet as custom chain
+- [x] Implement fhevmjs SDK for client-side encryption
+- [x] Create sample fhEVM smart contract with encrypted types
+- [x] Implement frontend write/read calls with encryption/decryption
+- [ ] Push to GitHub repository (user action required)

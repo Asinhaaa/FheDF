@@ -18,7 +18,8 @@ import {
   Github,
   ArrowRight,
   CheckCircle2,
-  Sparkles
+  Sparkles,
+  Wallet
 } from "lucide-react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
@@ -109,6 +110,10 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-6">
             <Link href="/tools/merge" className="text-muted-foreground hover:text-foreground transition-colors">
               Tools
+            </Link>
+            <Link href="/fhe-demo" className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+              <Wallet className="w-4 h-4" />
+              Web3 Demo
             </Link>
             <Link href="/docs" className="text-muted-foreground hover:text-foreground transition-colors">
               Documentation
