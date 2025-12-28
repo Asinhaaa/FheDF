@@ -8,6 +8,7 @@ import { Progress } from "@/components/ui/progress";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { convertPdfToDocx, downloadDocx } from "@/lib/pdfToDocxConverter";
+import { consumeCredit } from "@/lib/web3Service";
 import { toast } from "sonner";
 
 export default function PdfToDocx() {
@@ -50,11 +51,15 @@ export default function PdfToDocx() {
     setStatus("");
   }, []);
 
-  const handleDownload = useCallback(() => {
-    if (result) {
-      downloadDocx(result.blob, result.fileName);
-      toast.success("DOCX file downloaded!");
-    }
+  const handleDownload = useCallback(async () => {
+    if (!result) return;
+
+    // Gated by Sepolia Transaction
+    const success = await consumeCredit();
+    if (!success) return;
+
+    downloadDocx(result.blob, result.fileName);
+    toast.success("DOCX file downloaded!");
   }, [result]);
 
   return (

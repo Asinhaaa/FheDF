@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { compressPdf, downloadFile } from "@/lib/pdfUtils";
+import { consumeCredit } from "@/lib/web3Service";
 import { toast } from "sonner";
 
 export default function CompressPdf() {
@@ -58,9 +59,9 @@ export default function CompressPdf() {
       const reduction = Math.max(0, ((file.size - compressed.length) / file.size * 100)).toFixed(1);
       toast.success(`PDF compressed! Reduced by ${reduction}%`);
       
-      // Automatically trigger download
-      const newName = file.name.replace(".pdf", "_compressed.pdf");
-      downloadFile(compressed, newName);
+      // Download is now gated by a transaction in handleDownload
+      // const newName = file.name.replace(".pdf", "_compressed.pdf");
+      // downloadFile(compressed, newName);
     } catch (error) {
       console.error("Compression error:", error);
       toast.error("Failed to compress PDF. Please try again.");
@@ -69,11 +70,15 @@ export default function CompressPdf() {
     }
   };
 
-  const handleDownload = () => {
-    if (result && file) {
-      const newName = file.name.replace(".pdf", "_compressed.pdf");
-      downloadFile(result.data, newName);
-    }
+  const handleDownload = async () => {
+    if (!result || !file) return;
+
+    // Gated by Sepolia Transaction
+    const success = await consumeCredit();
+    if (!success) return;
+
+    const newName = file.name.replace(".pdf", "_compressed.pdf");
+    downloadFile(result.data, newName);
   };
 
   const handleReset = () => {

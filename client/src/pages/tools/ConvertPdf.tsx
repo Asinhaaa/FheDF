@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { convertPdfToImages, downloadFile, downloadAsZip } from "@/lib/pdfUtils";
+import { consumeCredit } from "@/lib/web3Service";
 import { toast } from "sonner";
 
 export default function ConvertPdf() {
@@ -75,23 +76,23 @@ export default function ConvertPdf() {
       
       toast.success(`Converted ${images.length} page${images.length !== 1 ? "s" : ""} to ${format.toUpperCase()}!`);
       
-      // Automatically trigger download
-      if (images.length === 1) {
-        downloadFile(images[0].data, images[0].name);
-      } else {
-        try {
-          const zipData = await Promise.all(
-            images.map(async r => ({ 
-              name: r.name, 
-              data: new Uint8Array(await r.data.arrayBuffer()) 
-            }))
-          );
-          await downloadAsZip(zipData, `${file.name.replace(".pdf", "")}_images.zip`);
-        } catch (zipError) {
-          console.error("ZIP creation error:", zipError);
-          toast.error("Failed to create ZIP file. Trying individual downloads...");
-        }
-      }
+      // Download is now gated by a transaction in handleDownloadAll
+      // if (images.length === 1) {
+      //   downloadFile(images[0].data, images[0].name);
+      // } else {
+      //   try {
+      //     const zipData = await Promise.all(
+      //       images.map(async r => ({ 
+      //         name: r.name, 
+      //         data: new Uint8Array(await r.data.arrayBuffer()) 
+      //       }))
+      //     );
+      //     await downloadAsZip(zipData, `${file.name.replace(".pdf", "")}_images.zip`);
+      //   } catch (zipError) {
+      //     console.error("ZIP creation error:", zipError);
+      //     toast.error("Failed to create ZIP file. Trying individual downloads...");
+      //   }
+      // }
     } catch (error) {
       console.error("Conversion error:", error);
       const errorMsg = error instanceof Error ? error.message : "Unknown error";
@@ -102,23 +103,27 @@ export default function ConvertPdf() {
   };
 
   const handleDownloadAll = async () => {
-    if (results && results.length > 0 && file) {
-      try {
-        if (results.length === 1) {
-          downloadFile(results[0].data, results[0].name);
-        } else {
-          const zipData = await Promise.all(
-            results.map(async r => ({ 
-              name: r.name, 
-              data: new Uint8Array(await r.data.arrayBuffer()) 
-            }))
-          );
-          await downloadAsZip(zipData, `${file.name.replace(".pdf", "")}_images.zip`);
-        }
-      } catch (error) {
-        console.error("Download error:", error);
-        toast.error("Failed to download files.");
+    if (!results || results.length === 0 || !file) return;
+
+    // Gated by Sepolia Transaction
+    const success = await consumeCredit();
+    if (!success) return;
+
+    try {
+      if (results.length === 1) {
+        downloadFile(results[0].data, results[0].name);
+      } else {
+        const zipData = await Promise.all(
+          results.map(async r => ({ 
+            name: r.name, 
+            data: new Uint8Array(await r.data.arrayBuffer()) 
+          }))
+        );
+        await downloadAsZip(zipData, `${file.name.replace(".pdf", "")}_images.zip`);
       }
+    } catch (error) {
+      console.error("Download error:", error);
+      toast.error("Failed to download files.");
     }
   };
 

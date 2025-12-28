@@ -6,6 +6,7 @@ import { FileDropZone } from "@/components/FileDropZone";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { mergePdfs, downloadFile } from "@/lib/pdfUtils";
+import { consumeCredit } from "@/lib/web3Service";
 import { toast } from "sonner";
 
 export default function MergePdf() {
@@ -38,8 +39,8 @@ export default function MergePdf() {
       setResult(mergedPdf);
       toast.success("PDFs merged successfully!");
       
-      // Automatically trigger download
-      downloadFile(mergedPdf, "merged.pdf");
+      // Download is now gated by a transaction in handleDownload
+      // downloadFile(mergedPdf, "merged.pdf");
     } catch (error) {
       console.error("Merge error:", error);
       toast.error("Failed to merge PDFs. Please try again.");
@@ -48,10 +49,14 @@ export default function MergePdf() {
     }
   };
 
-  const handleDownload = () => {
-    if (result) {
-      downloadFile(result, "merged.pdf");
-    }
+  const handleDownload = async () => {
+    if (!result) return;
+
+    // Gated by Sepolia Transaction
+    const success = await consumeCredit();
+    if (!success) return;
+
+    downloadFile(result, "merged.pdf");
   };
 
   const handleReset = () => {

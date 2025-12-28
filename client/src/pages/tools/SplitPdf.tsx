@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { splitPdf, downloadFile, downloadAsZip } from "@/lib/pdfUtils";
+import { consumeCredit } from "@/lib/web3Service";
 import { toast } from "sonner";
 
 export default function SplitPdf() {
@@ -53,12 +54,12 @@ export default function SplitPdf() {
       setResults(splitResults);
       toast.success(`PDF split into ${splitResults.length} file${splitResults.length !== 1 ? "s" : ""}!`);
       
-      // Automatically trigger download
-      if (splitResults.length === 1) {
-        downloadFile(splitResults[0].data, splitResults[0].name);
-      } else {
-        await downloadAsZip(splitResults, `${file.name.replace(".pdf", "")}_split.zip`);
-      }
+      // Download is now gated by a transaction in handleDownloadAll
+      // if (splitResults.length === 1) {
+      //   downloadFile(splitResults[0].data, splitResults[0].name);
+      // } else {
+      //   await downloadAsZip(splitResults, `${file.name.replace(".pdf", "")}_split.zip`);
+      // }
     } catch (error) {
       console.error("Split error:", error);
       toast.error("Failed to split PDF. Please try again.");
@@ -68,16 +69,20 @@ export default function SplitPdf() {
   };
 
   const handleDownloadAll = async () => {
-    if (results && results.length > 0 && file) {
-      try {
-        if (results.length === 1) {
-          downloadFile(results[0].data, results[0].name);
-        } else {
-          await downloadAsZip(results, `${file.name.replace(".pdf", "")}_split.zip`);
-        }
-      } catch (error) {
-        toast.error("Failed to download files.");
+    if (!results || results.length === 0 || !file) return;
+
+    // Gated by Sepolia Transaction
+    const success = await consumeCredit();
+    if (!success) return;
+
+    try {
+      if (results.length === 1) {
+        downloadFile(results[0].data, results[0].name);
+      } else {
+        await downloadAsZip(results, `${file.name.replace(".pdf", "")}_split.zip`);
       }
+    } catch (error) {
+      toast.error("Failed to download files.");
     }
   };
 
