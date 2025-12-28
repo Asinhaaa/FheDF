@@ -1,0 +1,84 @@
+/* Custom Responsive Cursor */
+:root {
+  --cursor-size: 20px;
+  --cursor-color: #ffff00;
+  --cursor-trail-color: rgba(255, 255, 0, 0.3);
+}
+
+/* Hide default cursor */
+* {
+  cursor: none !important;
+}
+
+/* Custom cursor element */
+.custom-cursor {
+  position: fixed;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  border: 2px solid var(--cursor-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  box-shadow: 0 0 10px var(--cursor-color), inset 0 0 10px var(--cursor-color);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.custom-cursor.active {
+  width: calc(var(--cursor-size) * 1.5);
+  height: calc(var(--cursor-size) * 1.5);
+  box-shadow: 0 0 20px var(--cursor-color), inset 0 0 20px var(--cursor-color);
+}
+
+/* Cursor trail */
+.cursor-trail {
+  position: fixed;
+  width: calc(var(--cursor-size) * 0.6);
+  height: calc(var(--cursor-size) * 0.6);
+  border: 1px solid var(--cursor-trail-color);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.8;
+  animation: trailFade 0.6s ease-out forwards;
+}
+
+@keyframes trailFade {
+  to {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+
+/* Clickable elements get special cursor */
+button,
+a,
+[role="button"],
+input[type="button"],
+input[type="submit"],
+.click-animation,
+.card-hover {
+  cursor: none !important;
+}
+
+button:hover,
+a:hover,
+[role="button"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.click-animation:hover,
+.card-hover:hover {
+  --cursor-size: 28px;
+}
+
+/* Text selection cursor */
+input,
+textarea,
+[contenteditable] {
+  cursor: none !important;
+}
+
+/* Disable cursor on specific elements */
+.no-cursor {
+  cursor: none !important;
+}
