@@ -141,6 +141,10 @@ export default function EncryptedSearch() {
     setProgress(0);
   };
 
+  const handleRemoveFile = () => {
+    handleReset();
+  };
+
   return (
     <ToolLayout
       title="Encrypted Search"
@@ -214,7 +218,7 @@ export default function EncryptedSearch() {
               <FileDropZone
                 onFilesSelected={handleFileSelected}
                 selectedFiles={file ? [file] : []}
-                onRemoveFile={handleRemoveFile}
+                onRemoveFile={() => handleReset()}
                 multiple={false}
                 disabled={isProcessing || !fheReady}
               />
