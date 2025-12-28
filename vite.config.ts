@@ -4,8 +4,20 @@ import react from "@vitejs/plugin-react";
 import fs from "node:fs";
 import path from "path";
 import { defineConfig } from "vite";
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin()];
+const plugins = [
+  react(), 
+  tailwindcss(), 
+  jsxLocPlugin(),
+  nodePolyfills({
+    globals: {
+      Buffer: true,
+      global: true,
+      process: true,
+    },
+  }),
+];
 export default defineConfig({
   base: "./",
   plugins,
