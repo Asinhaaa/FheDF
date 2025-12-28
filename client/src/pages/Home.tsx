@@ -60,6 +60,14 @@ const tools = [
     href: "/tools/pdf-to-docx",
     color: "bg-blue-500/10 text-blue-500",
   },
+  {
+    id: "search",
+    title: "Encrypted Search",
+    description: "Search through encrypted documents using FHE.",
+    icon: <Search className="w-6 h-6" />,
+    href: "/tools/search",
+    color: "bg-cyan-500/10 text-cyan-500",
+  },
 ];
 
 const container = {
