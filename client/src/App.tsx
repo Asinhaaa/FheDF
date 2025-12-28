@@ -12,13 +12,21 @@ import MergePdf from "./pages/tools/MergePdf";
 import SplitPdf from "./pages/tools/SplitPdf";
 import CompressPdf from "./pages/tools/CompressPdf";
 import ConvertPdf from "./pages/tools/ConvertPdf";
-
 import PdfToDocx from "./pages/tools/PdfToDocx";
 import Documentation from "./pages/Documentation";
+import { WalletProvider } from "./components/WalletProvider";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 function AppContent() {
   useCustomCursor();
-  return <Router />;
+  return (
+    <div className="relative min-h-screen">
+      <div className="absolute top-4 right-4 z-50">
+        <ConnectButton />
+      </div>
+      <Router />
+    </div>
+  );
 }
 
 function Router() {
@@ -41,12 +49,14 @@ function Router() {
 function App() {
   return (
     <ErrorBoundary>
-      <ThemeProvider defaultTheme="dark">
-        <TooltipProvider>
-          <Toaster />
-          <AppContent />
-        </TooltipProvider>
-      </ThemeProvider>
+      <WalletProvider>
+        <ThemeProvider defaultTheme="dark">
+          <TooltipProvider>
+            <Toaster />
+            <AppContent />
+          </TooltipProvider>
+        </ThemeProvider>
+      </WalletProvider>
     </ErrorBoundary>
   );
 }
